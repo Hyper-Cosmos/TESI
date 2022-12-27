@@ -58,6 +58,7 @@ class GeneticAlgorithm:
     def mainGA(self):
         varValues = []
         chromosomes = []
+        Excellentchromosomes = []
         for _ in range(self.numOfChromosome):
             for _ in range(self.numOfDimension):
                 randomvalue = random.uniform(self.lowerBound,self.upperBound)
@@ -175,31 +176,36 @@ class GeneticAlgorithm:
             bestChromosome = max(tempChromosomes)
             FinalFitnessValues.append(bestChromosome[0])
             # print(bestChromosome)
-            # if self.stoppingFitness <= bestChromosome[0]:
-            #    break
+            if self.stoppingFitness <= bestChromosome[0]:
+               break
             tempChromosomes = []
-        return max(FinalFitnessValues)
+        Excellentchromosomes.append(bestChromosome[0])
+        print (Excellentchromosomes)
+            
+        # return max(FinalFitnessValues)
 
-maxGen = 10
-LimitmaxGen = 80
-for i in range(maxGen):
-    if maxGen <= LimitmaxGen:
-        print('MaxGen Ke-',maxGen)
-        parameters = {
-            'numOfChromosome' : 10,
-            'lowerBound' : -10,
-            'upperBound' : 10,
-            'numOfDimension' : 3,
-            'crossoverRate' : 0.15,
-            'mutationRate' : 0.1,
-            'maxGen' : maxGen,
-            'stoppingFitness': 0.95,
-            'maxrun' : 30
-        }
+# maxGen = 10
+# LimitmaxGen = 80
+# for i in range(maxGen):
+#     if maxGen <= LimitmaxGen:
+#         print('MaxGen Ke-',maxGen)
+parameters = {
+    'numOfChromosome' : 47,
+    'lowerBound' : -10,
+    'upperBound' : 10,
+    'numOfDimension' : 3,
+    'crossoverRate' : 0.15,
+    'mutationRate' : 0.1,
+    'maxGen' : 39,
+    'stoppingFitness': 0.52,
+    'maxrun' : 10
+}
 
-        runGA = GeneticAlgorithm(parameters)
-        for i in range(parameters['maxrun']):
-            result = runGA.mainGA()
-            print(result)
-        print('')
-        maxGen += 10        
+runGA = GeneticAlgorithm(parameters)
+for i in range(parameters['maxrun']):
+    runGA.mainGA()
+#         for i in range(parameters['maxrun']):
+#             result = runGA.mainGA()
+#             print(result)
+#         print('')
+#         maxGen += 10        
